@@ -1,17 +1,32 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter, Route, Switch,Redirect } from 'react-router-dom'
+/* 组件 */
+import SiderDemo from './App';
+import ConfigTrain from './views/configTrain';
+import Project from './views/project';
 import reportWebVitals from './reportWebVitals';
+import Task from './views/task';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+const Web = () => {
+  return (
+    <BrowserRouter>
+      <div>
+        <SiderDemo className="aiLab" content={
+          <div>
+            <Switch>
+              <Route exact path='/' component={Project} />
+              <Route path="/configTrain" component={ConfigTrain} />
+              <Route path="/mytask" component={Task} />
+              <Route path="/myproject" component={Project} />
+              <Redirect to="/"/>
+            </Switch>
+          </div>
+        } />
+      </div>
+    </BrowserRouter>
+  )
+}
+ReactDOM.render(<Web />, document.getElementById('root'))
 reportWebVitals();
